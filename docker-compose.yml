@@ -1,0 +1,16 @@
+services:
+  variant-ecomerce-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: next-variant-ecomerce:multilang
+    container_name: variant-ecomerce-container
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    command: [ "npm", "run", "dev" ]
+    environment:
+      - NODE_ENV=development
