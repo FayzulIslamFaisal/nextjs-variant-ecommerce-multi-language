@@ -123,7 +123,7 @@
 }
 @layer utilities {
   .header-button {
-    @apply cursor-pointer border border-transparent p-1 hover:border-white rounded-2xl;
+    @apply cursor-pointer border border-transparent p-1 rounded-2xl;
   }
   .h1-bold {
     @apply text-2xl lg:text-4xl font-bold;
