@@ -1,5 +1,7 @@
 import { Input } from "@/components/ui/input";
-import {searchIcon} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { SearchIcon } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 const Search = () => {
     const categories =["men", "women", "kid", "accessories"];
     return (
@@ -16,8 +18,8 @@ const Search = () => {
                     
                 </SelectContent>
             </Select>
-            <Input className="flex-1 rounded-none dark:border-gray-200 bg-gray-100 text-black border-r border-none " placeholder="Search..." name="q" type="search" />
-        <Button type="submit" className="bg-primary text-primary-foreground rounded-s-none rounded-e-2xl h-full text-base px-3 py-2"><SearchIcon className="w-4 h-4"/></Button>
+            <Input className="flex-1 rounded-none dark:border-gray-200 bg-gray-100 text-black border-r border-none py-2 " placeholder="Search..." name="q" type="search" />
+            <Button type="submit" className="bg-primary text-primary-foreground rounded-s-none rounded-e-2xl h-full text-base px-3 py-1"><SearchIcon className="w-4 h-4"/></Button>
         </form>
     )
 }

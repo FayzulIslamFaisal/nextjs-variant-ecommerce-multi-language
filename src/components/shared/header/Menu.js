@@ -5,13 +5,13 @@ const Menu = () => {
   return (
     <div className="flex items-center justify-end">
         <nav className="flex gap-3 w-full items-center ">
-            <Link href="/signin" className="header-button">
+            <Link href="/signin" className="header-button flex flex-col justify-center items-center">
                 <UserIcon size={20} />
-                <span className="ml-2">Sign in</span>
+                <span className="">Sign in</span>
             </Link>
-            <Link href="/cart" className="header-button">
+            <Link href="/cart" className="header-button flex flex-col justify-center items-center">
                 <ShoppingCartIcon size={20} />
-                <span className="ml-2">Cart</span>
+                <span className="">Cart</span>
             </Link>
         </nav>
       
