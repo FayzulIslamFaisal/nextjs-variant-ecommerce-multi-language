@@ -1,9 +1,9 @@
-
+import HomeCarousel from '@/components/shared/home/HomeCarousel'
 const HomPpage = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold ">Home page</h1>
-    </div>
+    <>
+      <HomeCarousel />
+    </>
   )
 }
 
