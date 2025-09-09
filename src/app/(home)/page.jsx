@@ -5,8 +5,9 @@ import getAllCategories from "@/lib/prismaQueries/getAllCategories";
 
 import React from 'react'
 import { Card, CardContent } from '@/components/ui/card'
-import ProductSlider from './product-slider'
-import { Product } from '@/lib/types/models/product.model'
+import ProductSlider from '@/components/shared/product/ProductSlider'
+// import { Product } from '@/lib/types/models/product.model'
+import getProductByTag from '@/lib/prismaQueries/getProductByTag'
 
 
 const HomPpage = async () => {
@@ -14,6 +15,8 @@ const HomPpage = async () => {
   const rustic_cards = await getAllProducts(4, "Rustic");
   const modern_cards = await getAllProducts(4, "Modern");
   const intelligent_cards = await getAllProducts(4, "Intelligent");
+
+  const todaysDeals = await getProductByTag(4, "Rustic");
 
   return (
     <>

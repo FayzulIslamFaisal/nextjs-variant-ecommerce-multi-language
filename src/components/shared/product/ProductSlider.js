@@ -8,8 +8,8 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from '@/components/ui/carousel'
-import ProductCard from './product-card'
-import { Product } from '@/lib/types/models/product.model'
+import ProductCard from './ProductCard'
+// import { Product } from '@/lib/types/models/product.model'
 
 export default function ProductSlider({
     title,
