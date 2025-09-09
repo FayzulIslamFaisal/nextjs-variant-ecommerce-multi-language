@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma"
 
-const getAllCategories = async () => {
+const getAllCategories = async (limit = 10,) => {
     try {
         const category = await prisma.category.findMany({
+            take: limit,
             select: {
                 id: true,
                 name: true,

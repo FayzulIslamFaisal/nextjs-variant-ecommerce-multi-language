@@ -8,7 +8,7 @@ import Link from "next/link"
 const HomeCard = async ({cards}) => {
   
   return (
-    <div className="container mx-auto py-8 mb:py-12">
+    <div className="py-8 mb:py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-4">
         {cards.map((card) => (
           <Card key={card.id} className=" h-full flex flex-col rounded-2xl">
@@ -35,7 +35,9 @@ const HomeCard = async ({cards}) => {
                 <p className="text-center text-sm whitespace-nowrap overflow-hidden text-ellipsis">
                   {card?.name}
                 </p>
-                <p className="text-center text-sm text-gray-700 mt-1">${card.price.toFixed(2)}</p>
+                {
+                  card.price && (<p className="text-center text-sm text-gray-700 mt-1">${card.price.toFixed(2)}</p>)
+                }
               </Link>
             </CardContent>
           </Card>

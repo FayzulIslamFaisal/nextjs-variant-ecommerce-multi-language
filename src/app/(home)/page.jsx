@@ -5,28 +5,25 @@ import getAllCategories from "@/lib/prismaQueries/getAllCategories"
 
 
 const HomPpage = async () => {
-  const categories = await getAllCategories();
-  console.log("categories===>", categories);
-
+  const categories = await getAllCategories(4);
   const rustic_cards = await getAllProducts(4, "Rustic");
-  console.log("rustic_cards===>", rustic_cards);
-
   const modern_cards = await getAllProducts(4, "Modern");
-  console.log("modern_cards===>", modern_cards);
-
   const intelligent_cards = await getAllProducts(4, "Intelligent");
-  console.log("intelligent_cards===>", intelligent_cards);
-
-
-
-
 
   return (
     <>
       <HomeCarousel />
-      <HomeCard cards={rustic_cards} />
-      <HomeCard cards={modern_cards} />
-      <HomeCard cards={intelligent_cards} />
+      <div className="container mx-auto pt-8">
+        <h2 className="text-2xl font-bold mb-2">Explore to Category</h2>
+        <HomeCard cards={categories} />
+        <h2 className="text-2xl font-bold mb-2">Explore to New Arrivals</h2>
+        <HomeCard cards={rustic_cards} />
+        <h2 className="text-2xl font-bold mb-2">Discover Best Sellers</h2>
+        <HomeCard cards={modern_cards} />
+        <h2 className="text-2xl font-bold mb-2">Featured Products</h2>
+        <HomeCard cards={intelligent_cards} />
+      </div>
+      
     </>
   )
 }
