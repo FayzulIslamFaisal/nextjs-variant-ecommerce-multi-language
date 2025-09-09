@@ -1,7 +1,12 @@
 import HomeCarousel from '@/components/shared/home/HomeCarousel';
 import HomeCard from '@/components/shared/home/HomeCard';
-import getAllProducts from "@/lib/prismaQueries/getAllProducts"
-import getAllCategories from "@/lib/prismaQueries/getAllCategories"
+import getAllProducts from "@/lib/prismaQueries/getAllProducts";
+import getAllCategories from "@/lib/prismaQueries/getAllCategories";
+
+import React from 'react'
+import { Card, CardContent } from '@/components/ui/card'
+import ProductSlider from './product-slider'
+import { Product } from '@/lib/types/models/product.model'
 
 
 const HomPpage = async () => {
@@ -22,8 +27,14 @@ const HomPpage = async () => {
         <HomeCard cards={modern_cards} />
         <h2 className="text-2xl font-bold mb-2">Featured Products</h2>
         <HomeCard cards={intelligent_cards} />
+
+        <Card className='w-full rounded-none'>
+          <CardContent className='p-4 items-center gap-3'>
+            <ProductSlider title={"Today's Deals"} products={todaysDeals} />
+          </CardContent>
+        </Card>
       </div>
-      
+
     </>
   )
 }

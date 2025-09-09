@@ -1,69 +1,137 @@
 import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { formatCurrency } from '@/utils/formatter'
+import { formatNumber } from '@/util/formatter'
+import ProductPrice from './product-price'
+import ImageHover from './image-hover'
+import Rating from './Rating'
 
 
-const ProductPrice = ({
-  price,
-  className,
-  listPrice = 0,
-  isDeal = true,
-  forListing = true,
-  plain = false
+const ProductCard = ({
+    product,
+    hasBorder = false,
+    hasDetail = false,
+    className
 }) => {
-  const discountPercent = Math.round(100 - (price / listPrice) * 100)
-  const stringValue = price.toString()
-  const [intValue, floatValue] = stringValue.includes('.') 
-    ? stringValue.split('.') 
-    : [stringValue, '']
+    return (
+        <div className={cn('group cursor-pointer', className)}>
+            {hasBorder ? (
+                <div className={cn('p-4 space-y-2 border rounded-lg')}>
+                    <div className="text-center">
+                        <p className="font-bold text-sm text-gray-700">{product.brand}</p>
+                    </div>
 
-  return plain ? (
-    formatCurrency(price)
-  ) : listPrice == 0 ? (
-    <div className={cn('text-3xl', className)}>
-      <span className="text-xs align-super">$</span>
-      {intValue}
-      {floatValue && (
-        <span className="text-xs align-super">.{floatValue}</span>
-      )}
-    </div>
-  ) : isDeal ? (
-    <div className="space-y-2">
-      <div className="flex justify-center items-center gap-2">
-        <span className="bg-red-700 rounded-sm p-1 text-white text-sm font-semibold">
-          {discountPercent}% Off
-        </span>
-        <span className="text-red-700 text-xs font-bold">
-          Limited time deal
-        </span>
-      </div>
-      <div className={cn(`flex ${forListing && 'justify-center'} items-center gap-2`, className)}>
-        <span className="text-3xl text-gray-900">
-          <span className="text-xs align-super">$</span>
-          {intValue}
-          {floatValue && (
-            <span className="text-xs align-super">.{floatValue}</span>
-          )}
-        </span>
-        <span className="text-base text-gray-500 line-through">
-          {formatCurrency(listPrice)}
-        </span>
-      </div>
-    </div>
-  ) : (
-    <div className={cn(`flex ${forListing && 'justify-center'} items-center gap-2`, className)}>
-      <span className="text-3xl text-gray-900">
-        <span className="text-xs align-super">$</span>
-        {intValue}
-        {floatValue && (
-          <span className="text-xs align-super">.{floatValue}</span>
-        )}
-      </span>
-      <span className="text-base text-gray-500 line-through">
-        {formatCurrency(listPrice)}
-      </span>
-    </div>
-  )
+                    <Link href={`/products/${product.slug}`}>
+                        <div className="relative h-48 mb-3">
+                            {product.images.length > 1 ? (
+                                <ImageHover
+                                    src={product.images[0]}
+                                    hoverSrc={product.images[1]}
+                                    alt={product.name}
+                                    className="w-full h-full"
+                                />
+                            ) : (
+                                <Image
+                                    src={product.images[0]}
+                                    alt={product.name}
+                                    fill
+                                    className="object-contain"
+                                />
+                            )}
+                        </div>
+                    </Link>
+
+                    <Link href={`/products/${product.slug}`}>
+                        <h3
+                            className="overflow-hidden text-ellipsis whitespace-nowrap font-medium text-sm"
+                            title={product.name}
+                        >
+                            {product.name}
+                        </h3>
+                    </Link>
+
+                    <div className="flex items-center justify-center space-x-2">
+                        <Rating rating={product.avgRating} size={4} />
+                        <span className="text-xs text-gray-600">
+                            ({formatNumber(product.reviewCount)})
+                        </span>
+                    </div>
+
+                    {product.tags?.includes('today-deal') && (
+                        <div className="text-center">
+                            <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">
+                                Today's Deal
+                            </span>
+                        </div>
+                    )}
+
+                    <div className="text-center">
+                        <ProductPrice
+                            price={product.price}
+                            listPrice={product.listPrice}
+                            isDeal={product.isDeal}
+                            forListing={true}
+                        />
+                    </div>
+                </div>
+            ) : (
+                <div className="p-2 space-y-2">
+                    <Link href={`/products/${product.slug}`}>
+                        <div className="relative h-48">
+                            {product.images.length > 1 ? (
+                                <ImageHover
+                                    src={product.images[0]}
+                                    hoverSrc={product.images[1]}
+                                    alt={product.name}
+                                    className="w-full h-full"
+                                />
+                            ) : (
+                                <Image
+                                    src={product.images[0]}
+                                    alt={product.name}
+                                    fill
+                                    className="object-contain"
+                                />
+                            )}
+                        </div>
+                    </Link>
+
+                    {hasDetail && (
+                        <div className="p-2 space-y-2 text-center">
+                            <p className="font-bold text-sm text-gray-700">{product.brand}</p>
+
+                            <Link href={`/products/${product.slug}`}>
+                                <h3 className="overflow-hidden text-ellipsis line-clamp-2 font-medium text-sm h-10">
+                                    {product.name}
+                                </h3>
+                            </Link>
+
+                            <div className="flex items-center justify-center space-x-2">
+                                <Rating rating={product.avgRating} size={4} />
+                                <span className="text-xs text-gray-600">
+                                    ({formatNumber(product.reviewCount)})
+                                </span>
+                            </div>
+
+                            {product.tags?.includes('today-deal') && (
+                                <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">
+                                    Today's Deal
+                                </span>
+                            )}
+
+                            <ProductPrice
+                                price={product.price}
+                                listPrice={product.listPrice}
+                                isDeal={product.isDeal}
+                                forListing={true}
+                            />
+                        </div>
+                    )}
+                </div>
+            )}
+        </div>
+    )
 }
 
-export default ProductPrice
+export default ProductCard
