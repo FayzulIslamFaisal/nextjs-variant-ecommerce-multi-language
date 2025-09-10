@@ -15,7 +15,6 @@ export default function ProductSlider({
     title,
     products,
     hideDetails = false,
-    className
 }) {
     return (
         <div className='w-full bg-background'>

@@ -5,7 +5,6 @@ import ImageHover from './ImageHover'
 const ProductCard = ({
     product,
     hasBorder = false,
-    hasDetail = false
 }) => {
     return (
         <Link href={`/products/${product.slug}`}>

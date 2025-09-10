@@ -61,7 +61,7 @@ const ProductCard = ({
                     {product.tags?.includes('today-deal') && (
                         <div className="text-center">
                             <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">
-                                Today's Deal
+                                Todays Deal
                             </span>
                         </div>
                     )}
@@ -116,7 +116,7 @@ const ProductCard = ({
 
                             {product.tags?.includes('today-deal') && (
                                 <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">
-                                    Today's Deal
+                                    Todays Deal
                                 </span>
                             )}
 
