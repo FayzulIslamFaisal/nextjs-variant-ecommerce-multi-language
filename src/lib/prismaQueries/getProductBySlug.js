@@ -6,6 +6,10 @@ const getProductBySlug = async (slug) => {
                 slug: slug,
                 isPublished: true
             },
+            include: {
+                category: true,
+                brand: true,
+            }
         })
         return product
     } catch (error) {
