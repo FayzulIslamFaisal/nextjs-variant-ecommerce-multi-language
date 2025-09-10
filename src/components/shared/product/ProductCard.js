@@ -11,22 +11,27 @@ const ProductCard = ({
         <Link href={`/products/${product.slug}`}>
             <div className={`relative ${hasBorder ? 'border p-4 rounded-lg' : ''}`}>
                 <div className="relative h-48 mb-4">
-                    {product.images.length > 1 ? (
+                    {product.image.length > 1 ? (
                         <ImageHover
-                            src={product.images[0]}
-                            hoverSrc={product.images[1]}
+                            src={product.image[0]}
+                            hoverSrc={product.image[1]}
                             alt={product.name}
                             className="w-full h-full"
                         />
                     ) : (
                         <Image
-                            src={product.images[0]}
+                            src={product.image[0]}
                             alt={product.name}
                             fill
                             className="object-contain"
                         />
                     )}
                 </div>
+                <h3 className="text-lg font-semibold">{product.name}</h3>
+                <p className="text-sm text-gray-500">{product.description}</p>
+                <p className="text-base text-gray-500">{product.avgRating}</p>
+                <p className="text-base font-semibold">${product.price}</p>
+                
             </div>
         </Link>
     )

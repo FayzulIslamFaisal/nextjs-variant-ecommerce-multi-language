@@ -15,8 +15,7 @@ const HomPpage = async () => {
   const rustic_cards = await getAllProducts(4, "Rustic");
   const modern_cards = await getAllProducts(4, "Modern");
   const intelligent_cards = await getAllProducts(4, "Intelligent");
-
-  const todaysDeals = await getProductByTag(4, "Rustic");
+  const todaysDeals = await getProductByTag(4, "Modern");
 
   return (
     <>
@@ -31,7 +30,7 @@ const HomPpage = async () => {
         <h2 className="text-2xl font-bold mb-2">Featured Products</h2>
         <HomeCard cards={intelligent_cards} />
 
-        <Card className='w-full rounded-none'>
+        <Card className='w-full rounded-none mb-8'>
           <CardContent className='p-4 items-center gap-3'>
             <ProductSlider title={"Today's Deals"} products={todaysDeals} />
           </CardContent>
