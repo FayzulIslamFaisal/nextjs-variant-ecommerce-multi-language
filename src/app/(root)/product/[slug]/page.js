@@ -1,10 +1,18 @@
 import getProductBySlug from "@/lib/prismaQueries/getProductBySlug";
+import getRelatedProductByCategory from "@/lib/prismaQueries/getRelatedProductByCategory";
 
-const ProductDetailsPage = async({params}) => {
+const ProductDetailsPage = async({params, searchParams}) => {
     const slug = await params.slug;
-    console.log("slug===>> ",slug);
-    
+    const searchParama = await searchParams;
+    const { color, size } = await searchParams;
+
     const product = await getProductBySlug(slug);
+    console.log(product, "product");
+
+    
+    const relatadedProducts = await getRelatedProductByCategory(product?.categoryId, 4, product?.id);
+    console.log("relatadedProducts",relatadedProducts);
+    
     if(!product){
         return (
             <div className="flex justify-center items-center h-screen">

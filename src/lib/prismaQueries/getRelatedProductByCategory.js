@@ -1,11 +1,11 @@
 import { prisma } from "@/lib/prisma";
 
-const getRelatedProductByCategory = async (category, limit = 10, productId) => {
+const getRelatedProductByCategory = async (categoryId, limit = 10, productId) => {
   try {
     const products = await prisma.product.findMany({
       take: limit,
       where: {
-        category: category,
+        categoryId,
         isPublished: true,
         NOT: {
           id: productId,
