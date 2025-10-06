@@ -1,13 +1,22 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import Search from "@/components/shared/header/Search";
 import Menu from "@/components/shared/header/Menu";
-import { Button } from "@/components/ui/button";
-import { MenuIcon } from "lucide-react";
 import data from "@/lib/data";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 const Header = () => {
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+  const handleSearch=()=>{
+    console.log("searching", query);
+    if(query.trim() !== ""){
+      router.push(`/search/${query}`);
+    }
+  }
   return (
     <header className=" bg-black text-white">
       <div className="px-2">
@@ -19,35 +28,27 @@ const Header = () => {
                 </Link>
             </div>
             <div className="hidden md:block flex-1 max-w-xl">
-                <Search/>
+                <Search setQuery={setQuery} query={query} onHandleSearch={handleSearch}/>
             </div>
             <Menu/>
         </div>
-        <div className="md:hidden block py-2">
-            <Search/>
-        </div>
       </div>
       <div className='flex items-center px-3 mb-[1px] bg-gray-800'>
-  <Button
-    variant='ghost'
-    className='header-button flex items-center gap-1 text-base [&_svg]:size-6'
-  >
-    <MenuIcon />
-    All
-  </Button>
-
-  <div className='flex items-center flex-wrap gap-3 overflow-hidden max-h-[42px]'>
-    {data.headerMenus.map((menu) => (
-      <Link
-        href={menu.href}
-        key={menu.href}
-        className='header-button !p-2'
-      >
-        {menu.name}
-      </Link>
-    ))}
-  </div>
-</div>
+        <div className='flex items-center flex-wrap gap-3 overflow-hidden max-h-[42px]'>
+          {data.headerMenus.map((menu) => (
+            <Link
+              href={menu.href}
+              key={menu.href}
+              className='header-button !p-2'
+            >
+              {menu.name}
+            </Link>
+          ))}
+        </div>
+        <div className='ml-auto header-button !p-2'>
+          <span className=" text-yellow-300">Log Out</span>
+        </div>
+      </div>
 
     </header>
   )
