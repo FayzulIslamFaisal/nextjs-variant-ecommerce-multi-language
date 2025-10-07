@@ -1,6 +1,8 @@
 import HomeCarousel from '@/components/shared/home/HomeCarousel';
 
+
 const HomePage = async () => {
+
 
   return (
     <>
@@ -8,5 +10,6 @@ const HomePage = async () => {
     </>
   )
 }
+
 
 export default HomePage;

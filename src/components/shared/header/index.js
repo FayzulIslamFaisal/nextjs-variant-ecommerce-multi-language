@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Search from "@/components/shared/header/Search";
 import Menu from "@/components/shared/header/Menu";
-import { Button } from "@/components/ui/button";
-import { MenuIcon } from "lucide-react";
 import data from "@/lib/data";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

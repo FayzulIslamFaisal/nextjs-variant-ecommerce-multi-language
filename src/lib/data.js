@@ -3,6 +3,11 @@
 const data = {
     headerMenus:[
         {
+            name:"All",
+            href:"/search?tag=all",
+            id:0
+        },
+        {
             name:"Todays Deals",
             href:"/search?tag=todays-deals",
             id:1
