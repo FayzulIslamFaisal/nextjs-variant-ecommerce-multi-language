@@ -1,3 +1,4 @@
+import SearchResults from "@/components/SearchResults";
 import getProductsSearchByName from "@/lib/prismaQueries/getProductsSearchByName";
 
 const page = async ({ params }: { params: { query: string } }) => {
@@ -7,20 +8,19 @@ const page = async ({ params }: { params: { query: string } }) => {
     console.log("products===>", products);
 
     if (!products || products.length === 0) {
-        return <div>No products found</div>;
+        return <div className=" flex items-center justify-center h-screen">
+            <p className="text-lg">No products found</p>
+        </div>;
     }
 
     return (
         <div>
-            <h1>Search Results for: {query}</h1>
-            <ul>
+            <h1>Search Results for: {products?.length}</h1>
+            <div className=" container mx-auto px-3">
                 {products.map((product) => (
-                    <li key={product.id}>
-                        <h2>{product.name}</h2>
-                        <p>Price: ${product.price}</p>
-                    </li>
+                    <SearchResults key={product.id} product={product} />
                 ))}
-            </ul>
+            </div>
         </div>
     )
 }

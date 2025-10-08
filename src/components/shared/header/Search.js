@@ -1,11 +1,10 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 const Search = ({ query, setQuery, onHandleSearch }) => {
     return (
         <div className=" flex items-stretch h-10 ">
-            
+
             <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
