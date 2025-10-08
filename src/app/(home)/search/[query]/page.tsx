@@ -16,10 +16,12 @@ const page = async ({ params }: { params: { query: string } }) => {
     return (
         <div>
             <h1>Search Results for: {products?.length}</h1>
-            <div className=" container mx-auto px-3">
-                {products.map((product) => (
-                    <SearchResults key={product.id} product={product} />
-                ))}
+            <div className="container mx-auto px-3">
+                <div className="!grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-4">
+                    {products.map((product) => (
+                        <SearchResults key={product.id} product={product} />
+                    ))}
+                </div>
             </div>
         </div>
     )
