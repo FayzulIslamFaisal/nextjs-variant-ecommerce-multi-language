@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Star, ShoppingCart, Heart } from "lucide-react"
+import Link from "next/link"
 
 const SearchResults = ({ product }) => {
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
@@ -60,7 +61,9 @@ const SearchResults = ({ product }) => {
 
                 {/* Product Name */}
                 <h3 className="mb-2 text-balance text-lg font-semibold leading-tight text-foreground line-clamp-2">
-                    {product.name}
+                    <Link href={`/product/${product.slug}`} className="">
+                        {product.name}
+                    </Link>
                 </h3>
 
                 {/* Description */}
@@ -124,12 +127,12 @@ const SearchResults = ({ product }) => {
 
                 {/* Sales Count */}
                 {product.numSales && product.numSales > 0 && (
-                    <p className="mt-1 text-xs text-muted-foreground">{product.numSales} sold</p>
+                    <p className="mt-1 text-xs text-black">{product.numSales} sold</p>
                 )}
             </CardContent>
 
             <CardFooter className="p-4 pt-0">
-                <Button className="w-full" size="lg">
+                <Button className="w-full text-white font-bold" size="lg">
                     <ShoppingCart className="mr-2 h-4 w-4" />
                     Add to Cart
                 </Button>
