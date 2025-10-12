@@ -1,19 +1,29 @@
-
-import { useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CartItem } from "@/components/cart/CartItem";
-import { CartSummary } from "@/components/cart/CartSummary";
-import { EmptyCart } from "@/components/cart/EmptyCart";
-import { mockCartItems } from "@/data/mockCart";
-import { CartItem as CartItemType } from "@/types/product";
-import { useNavigate } from "react-router-dom";
+import CartItem from "@/components/card/CartItem";
+import CartSummary from "@/components/card/CartSummary";
+import EmptyCart from "@/components/card/EmptyCart";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const CardDetails = () => {
-  const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState<CartItemType[]>(mockCartItems);
+  const router = useRouter();
+  const count = useSelector((state) => state.card.cardItems); // from Redux store
 
+  // Initialize cartItems safely
+  const [cartItems, setCartItems] = useState([]);
+
+  // Sync local state with Redux store whenever it changes
+  useEffect(() => {
+    if (count && Array.isArray(count)) {
+      setCartItems(count);
+    }
+  }, [count]);
+
+  // Handlers
   const handleUpdateQuantity = (id, quantity) => {
     setCartItems((items) =>
       items.map((item) => (item.id === id ? { ...item, quantity } : item))
@@ -26,7 +36,11 @@ const CardDetails = () => {
     toast.success("Item removed from cart");
   };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  // Derived values
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   const shipping = subtotal > 100 ? 0 : 9.99;
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
@@ -40,14 +54,16 @@ const CardDetails = () => {
           <div className="flex items-center justify-between">
             <Button
               variant="ghost"
-              onClick={() => navigate("/")}
+              onClick={() => router.push("/")}
               className="gap-2"
             >
               <ArrowLeft className="h-4 w-4" />
               Continue Shopping
             </Button>
-            <h1 className="text-2xl font-bold text-foreground">Shopping Cart</h1>
-            <div className="w-32" /> {/* Spacer for centering */}
+            <h1 className="text-2xl font-bold text-foreground">
+              Shopping Cart
+            </h1>
+            <div className="w-32" />
           </div>
         </div>
       </header>
@@ -65,6 +81,7 @@ const CardDetails = () => {
                   Cart Items ({itemCount})
                 </h2>
               </div>
+
               {cartItems.map((item) => (
                 <CartItem
                   key={item.id}
