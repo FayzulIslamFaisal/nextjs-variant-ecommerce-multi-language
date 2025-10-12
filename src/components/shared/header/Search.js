@@ -2,21 +2,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 const Search = ({ query, setQuery, onHandleSearch }) => {
-    // const categories =["men", "women", "kid", "accessories"];
     return (
         <div className=" flex items-stretch h-10 ">
-            {/* <Select name="category" className="py-2 h-full ">
-                <SelectTrigger className="w-[120px] h-full bg-white text-black rounded-none outline-0">
-                    <SelectValue placeholder="All" />
-                </SelectTrigger>
-                <SelectContent position="popper" className="h-full">
-                    <SelectItem value="all" className="h-[40px]">All</SelectItem>
-                    {categories.map((category, index) => (
-                        <SelectItem key={index} value={category}>{category}</SelectItem>
-                    ))}
-                    
-                </SelectContent>
-            </Select> */}
+
             <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
