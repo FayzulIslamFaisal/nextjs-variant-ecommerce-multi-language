@@ -6,8 +6,7 @@ import Menu from "@/components/shared/header/Menu";
 import data from "@/lib/data";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { MenuIcon } from "lucide-react";
+
 
 
 const Header = () => {

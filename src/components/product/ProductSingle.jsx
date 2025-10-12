@@ -2,12 +2,14 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
-import { Star, ShoppingCart, Zap, Package, Shield, Truck } from "lucide-react"
+import AddToCard from "@/components/AddToCard"
+import BuyNowBtn from "@/components/BuyNowBtn"
+import { Star, Package, Shield, Truck } from "lucide-react"
 
 import ImageGallery from "./ImageGallery";
+import { useSelector } from "react-redux"
 const colorMap = {
     Red: "bg-red-500",
     Black: "bg-black",
@@ -21,9 +23,8 @@ const ProductSingle = ({ product }) => {
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes[1])
     const [quantity, setQuantity] = useState(1)
-
-    const discount = Math.round(((product.listPrice - product.price) / product.listPrice) * 100)
-
+    const discount = Math.round(((product.listPrice - product.price) / product.listPrice) * 100);
+    
     return (
         <div className="container mx-auto px-4 py-8 lg:py-12">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
@@ -135,18 +136,8 @@ const ProductSingle = ({ product }) => {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                        <Button size="lg" className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground">
-                            <ShoppingCart className="w-5 h-5 mr-2" />
-                            Add to Cart
-                        </Button>
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            className="flex-1 border-2 border-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-                        >
-                            <Zap className="w-5 h-5 mr-2" />
-                            Buy Now
-                        </Button>
+                        <AddToCard product={product} />
+                        <BuyNowBtn product={product} />
                     </div>
 
                     {/* Features */}
